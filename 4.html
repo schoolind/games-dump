@@ -1,0 +1,49 @@
+<!-- 1752149048220 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/gh/schoolind/basket-ball-stars-/patch/cloner-v27.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/css/app.css" type="text/css" />    
+    <title>
+        Basketball Legends
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+</head>
+
+<body style= "margin: 0px; padding: 0px; overflow: hidden;">
+    <div id="content"></div>
+    <script>
+    /* sdk-v2.js injects its sdk-core-*.js as "./patch/poki/" relative to the page;
+       rewrite that to the CDN so nothing loads from localhost. */
+    (function() {
+        var CDN = "https://cdn.jsdelivr.net/gh/schoolind/basket-ball-stars-/";
+        var _set = Element.prototype.setAttribute;
+        Element.prototype.setAttribute = function(name, value) {
+            if (name === "src" && typeof value === "string" && value.indexOf("./patch/poki/") === 0) {
+                value = CDN + value.substring(2);
+            }
+            return _set.call(this, name, value);
+        };
+    })();
+    </script>
+    <div id="loader">Loading ...</div>
+    
+    <script src="https://cdn.jsdelivr.net/gh/schoolind/basket-ball-stars-/patch/poki/sdk-v2.js?//game-cdn.poki.com/scripts/v2/poki-sdk.js"></script>    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/nape.min.js">
+        var nape = "nape.min.js";
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/easeljs-0.8.2.combined.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/phaser.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/phaser-cachebuster.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/phaser-super-storage.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/dragonBones.min.js"></script> 
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ahrdevelopers/basketball-stars-unblocked-games-premium/assets/lib/pksl.js"></script>  -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/schoolind/basket-ball-stars-/basketball_legends_2019.min.js"></script></body>
+
+</html>
