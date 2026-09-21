@@ -1,49 +1,19 @@
-<!-- 1765890870531 -->
+<!-- 1765977577608 -->
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Every relative URL below (style.css, appmanifest.json, box2d.wasm.js, scripts/*.js, and all runtime
-         fetches of images/, media/, box2d.wasm) is loaded from the jsDelivr mirror of ahrdevelopers/basket-random
-         (the unmodified original game). -->
-    <base href="https://cdn.jsdelivr.net/gh/ahrdevelopers/basket-random/">
-
-    <!-- The two EDITED files (data.json, scripts/c3runtime.js) are loaded from the schoolind/Games mirror instead.
-         Both are requested by the runtime using this page's own URL, so the two exact local URLs are redirected:
-         - scripts/c3runtime.js: main.js injects it as a <script src=...>  -> HTMLScriptElement.src setter hook
-         - data.json:            c3runtime.js loads it with fetch(...)      -> window.fetch hook -->
-    <script>
-    (function () {
-        var EDITED_CDN = "https://cdn.jsdelivr.net/gh/schoolind/Games/basket-random/";
-        var localRuntime = new URL("scripts/c3runtime.js", location.href).href;
-        var localData = new URL("data.json", location.href).href;
-
-        var desc = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, "src");
-        Object.defineProperty(HTMLScriptElement.prototype, "src", {
-            configurable: true,
-            enumerable: desc.enumerable,
-            get: function () { return desc.get.call(this); },
-            set: function (v) { desc.set.call(this, v === localRuntime ? EDITED_CDN + "scripts/c3runtime.js" : v); }
-        });
-
-        var origFetch = window.fetch;
-        window.fetch = function (input, init) {
-            var url = typeof input === "string" ? input : (input && input.url) || (input && input.href);
-            if (url === localData) input = EDITED_CDN + "data.json";
-            return origFetch.call(this, input, init);
-        };
-    })();
-    </script>
+    <script src="https://cdn.jsdelivr.net/gh/schoolind/Games@HEAD/soccer-random/patch/_cloner-v3-39.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/patch/_cloner-monitor-v1-16.js?/freezenova=ubg66ez/soccer-random/"></script>
+<script src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/patch/freezenova/_cloner.js"></script>
 
 <meta charset="UTF-8">
-<title>Basket Random</title>
+<title>Soccer Random - Twoplayergames.org</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-<meta name="generator" content="Construct 3">
-
-	<link rel="manifest" href="appmanifest.json">
+	<link rel="manifest" href="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/appmanifest.json">
 
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/style.css">
 
 <script>
 window.addEventListener("keydown", function(e) {
@@ -57,18 +27,45 @@ window.addEventListener("keydown", function(e) {
 </head>
 <body style= "margin: 0px; padding: 0px; overflow: hidden;">
 <div id="fb-root"></div>
-	<script src="box2d.wasm.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/box2d.wasm.js"></script>
 	<noscript>
 		<div id="notSupportedWrap">
 			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
 			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
-			<p class="notSupportedMessage">This content was made with Construct 3 - a <a href="https://www.construct.net/en">free game maker</a>.</p>
+			<p class="notSupportedMessage">This content was created in Construct 3. <a href="https://www.construct.net/en">Create games online</a></p>
 		</div>
 	</noscript>
-	<script src="scripts/supportcheck.js"></script>
-	<script src="scripts/offlineclient.js"></script>
-	<script src="scripts/main.js"></script>
-	<script src="scripts/register-sw.js"></script>
-<script defer src="./patch/cloudflare/beacon.min.js?https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" __integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9aee71b2f3d481c6","version":"2025.9.1","r":1,"token":"1e8895a8b80842338a40a4bfc93bbb53","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/scripts/supportcheck.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/scripts/offlineclient.js"></script>
+	<script>
+	// Load the C3 project data (data.json) from the schoolind/Games CDN, then start the game.
+	// The runtime reads this via the standard preview blob hook (cr_previewImageBlobs).
+	(function () {
+		var DATA_JSON_URL = "https://cdn.jsdelivr.net/gh/schoolind/Games@HEAD/soccer-random/data.json";
+
+		function startGame() {
+			var script = document.createElement("script");
+			script.src = "https://cdn.jsdelivr.net/gh/schoolind/Games@HEAD/soccer-random/scripts/main.js";
+			script.async = false;
+			document.head.appendChild(script);
+		}
+
+		fetch(DATA_JSON_URL, { cache: "no-cache" })
+			.then(function (response) {
+				if (!response.ok) throw new Error("HTTP " + response.status);
+				return response.blob();
+			})
+			.then(function (blob) {
+				window.cr_previewImageBlobs = window.cr_previewImageBlobs || {};
+				window.cr_previewImageBlobs["data.json"] = blob;
+			})
+			.catch(function (err) {
+				console.warn("Failed to load data.json from CDN, falling back to the local data.json:", err);
+			})
+			.then(startGame);
+	})();
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/scripts/register-sw.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/ahrdevelopers/soccer-random/patch/cloudflare/beacon.min.js?https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" __integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9af6b69256495ff6","version":"2025.9.1","r":1,"token":"1e8895a8b80842338a40a4bfc93bbb53","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 </html>
