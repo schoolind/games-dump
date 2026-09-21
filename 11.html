@@ -1,0 +1,59 @@
+<!-- 1765977577608 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/gh/schoolind/Games@HEAD/soccer-random-2/patch/_cloner-v3-39.js"></script>
+
+<meta charset="UTF-8">
+<title>Soccer Random - Twoplayergames.org</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+<script>
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+</script>
+
+</head>
+<body style= "margin: 0px; padding: 0px; overflow: hidden;">
+<div id="fb-root"></div>
+	<noscript>
+		<div id="notSupportedWrap">
+			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
+			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+			<p class="notSupportedMessage">This content was created in Construct 3. <a href="https://www.construct.net/en">Create games online</a></p>
+		</div>
+	</noscript>
+	<script>
+	// Load the C3 project data (data.json) from the schoolind/Games CDN, then start the game.
+	// The runtime reads this via the standard preview blob hook (cr_previewImageBlobs).
+	(function () {
+		var DATA_JSON_URL = "https://cdn.jsdelivr.net/gh/schoolind/Games@HEAD/soccer-random-2/data.json";
+
+		function startGame() {
+			var script = document.createElement("script");
+			script.src = "https://cdn.jsdelivr.net/gh/schoolind/Games@HEAD/soccer-random-2/scripts/main.js";
+			script.async = false;
+			document.head.appendChild(script);
+		}
+
+		fetch(DATA_JSON_URL, { cache: "no-cache" })
+			.then(function (response) {
+				if (!response.ok) throw new Error("HTTP " + response.status);
+				return response.blob();
+			})
+			.then(function (blob) {
+				window.cr_previewImageBlobs = window.cr_previewImageBlobs || {};
+				window.cr_previewImageBlobs["data.json"] = blob;
+			})
+			.catch(function (err) {
+				console.warn("Failed to load data.json from CDN, falling back to the local data.json:", err);
+			})
+			.then(startGame);
+	})();
+	</script>
+</body>
+</html>
